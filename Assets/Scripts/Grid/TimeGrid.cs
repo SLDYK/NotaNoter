@@ -9,7 +9,6 @@ using UnityEngine;
 [System.Serializable]
 public class BeatInfo
 {
-    public float Beat;
     public float BeatTime;
     public int BeatNum;
     public bool IntBeat;
@@ -75,7 +74,6 @@ public class TimeGrid : MonoBehaviour
                 }
             }
             BeatInfo Abeat = new BeatInfo();
-            Abeat.Beat = beat;
             Abeat.BeatNum = beat;
             Abeat.BeatTime = time;
             Abeat.IntBeat = true;
@@ -143,10 +141,9 @@ public class TimeGrid : MonoBehaviour
         foreach (BeatInfo beatinfo in BeatList)
         {
             BeatInfo beat = new BeatInfo();
-            beat.BeatTime = beatinfo.BeatTime + Chart.offset / 1000f;
+            beat.BeatTime = beatinfo.BeatTime;
             beat.BeatNum = beatinfo.BeatNum;
             beat.IntBeat = beatinfo.IntBeat;
-            beat.Beat = beatinfo.Beat;
             BeatLineList.Add(beat);
         }
         return BeatLineList;

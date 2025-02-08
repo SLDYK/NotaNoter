@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
     public bool Paused;
     public float TimerShifting = 1;
     public float Length;
-
+    private float TargetTime;
     public AudioController AudioController;
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,7 @@ public class Timer : MonoBehaviour
         if (!Paused)
         {
             ElapsedTime = (Time.time - StartTime) * TimerShifting;
+            TargetTime = ElapsedTime;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -37,6 +38,13 @@ public class Timer : MonoBehaviour
             {
                 PauseTimer();
             }
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (Paused)
+        {
+            ElapsedTime += (TargetTime - ElapsedTime) / 5;
         }
     }
     public void PauseTimer()
@@ -53,7 +61,8 @@ public class Timer : MonoBehaviour
     public void SetTimer(float SetTime)
     {
         PauseTimer();
-        ElapsedTime = SetTime;
+        //ElapsedTime = Mathf.Max(SetTime, 0);
+        TargetTime = Mathf.Max(SetTime, 0);
     }
     public float GetElapsedTime()
     {

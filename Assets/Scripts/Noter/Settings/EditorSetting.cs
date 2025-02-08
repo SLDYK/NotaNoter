@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class EditorSetting : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class EditorSetting : MonoBehaviour
     public AudioSource AudioSource;
     public AudioManager AudioManager;
     public Timer Timer;
+    public DynamicResolution DynamicResolution;
+    public bool SetScale = false;
     public void Shifting(int Value)
     {
         Timer.PauseTimer();
@@ -23,7 +26,6 @@ public class EditorSetting : MonoBehaviour
                 Timer.TimerShifting = 0.5f;
                 break;
         }
-
     }
     public void Sound()
     {
@@ -31,11 +33,20 @@ public class EditorSetting : MonoBehaviour
         AudioManager.SoundLevel = HitFXSound.value;
     }
     public GameObject Canvas;
-    public void EditorScale(float Value)
+    public void EditorScale()
     {
-        foreach (Transform child in Canvas.transform)
+        SetScale = !SetScale;
+    }
+    private void Update()
+    {
+        if (SetScale)
         {
-            child.localScale = new Vector3(Value, Value, Value);
+            float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel");
+            float Value = transform.localScale.x;
+            foreach (Transform child in Canvas.transform)
+            {
+                child.localScale = new Vector3(Value + scrollWheelInput, Value + scrollWheelInput, 1);
+            }
         }
     }
     public GameObject IngameConsole;
@@ -47,5 +58,21 @@ public class EditorSetting : MonoBehaviour
     public void SetLight(float Value)
     {
         Camera.backgroundColor = new Color(Value, Value, Value);
+    }
+    public void SetResolution(int Value)
+    {
+        switch (Value)
+        {
+            case 0:
+                DynamicResolution.fixedHeight = 720;
+                break;
+            case 1:
+                DynamicResolution.fixedHeight = 1080;
+                break;
+            case 2:
+                DynamicResolution.fixedHeight = 480;
+                break;
+        }
+        DynamicResolution.AdjustResolution();
     }
 }

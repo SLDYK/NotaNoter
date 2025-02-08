@@ -10,11 +10,12 @@ public class AudioController : MonoBehaviour
 {
     public AudioSource AudioSource;
     public Timer Timer;
+    public ChartLoader ChartLoader;
 
     IEnumerator Start()
     {
         string ManagerSetChartPath = System.Environment.CurrentDirectory + "/LoadPath.txt";
-        string AudioPath = File.ReadAllText(ManagerSetChartPath).Split('\n')[1].Replace("\r", "").Trim();
+        string AudioPath = File.ReadAllLines(ManagerSetChartPath)[1].Trim();
         AudioType AudioType = DetectAudioType(AudioPath);
         using (var www = UnityWebRequestMultimedia.GetAudioClip("file://" + AudioPath, AudioType))
         {
@@ -38,7 +39,7 @@ public class AudioController : MonoBehaviour
     }
     public void AudioResume()
     {
-        float elapsedTime = Timer.GetElapsedTime();
+        float elapsedTime = Timer.GetElapsedTime() - ChartLoader.GetChart().offset / 1000f;
         if (elapsedTime >= 0)
         {
             AudioSource.time = elapsedTime;

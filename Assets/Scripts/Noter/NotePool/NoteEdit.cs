@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using UnityEngine.EventSystems;
 public class NoteEdit : MonoBehaviour
 {
     public int Selected = -1;//单个选中id，-1表示无选中
@@ -82,66 +82,39 @@ public class NoteEdit : MonoBehaviour
             MultiSelected.Clear();
             Fresh = true;
         }
-        //Q放置Tap
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (EventSystem.current.currentSelectedGameObject == null)
         {
-            Vector2 TargetPos = PosInGrid.TargetPos();
-            note note = new note();
-            note.type = 0;
-            note.lineId = (int)TargetPos.x;
-            note.time = (int)TargetPos.y;
-            note.id = NoteCreator.NoteId++;
-            note.speed = NotePreset.GetPresetNote().speed;
-            note.livingTime = NotePreset.GetPresetNote().livingTime;
-            note.LineSide = NotePreset.GetPresetNote().LineSide;
-            note.fake = NotePreset.GetPresetNote().fake;
-            note._color = NotePreset.GetPresetNote()._color;
-            foreach (judgeline judgeline in NoteCreator.judgelineList)
-            {
-                if(judgeline.id == note.lineId)
-                {
-                    judgeline.noteList.Add(note);
-                }
-            }
-            Selected = NoteCreator.NoteId - 1;
-            MultiSelected.Clear();
-            Fresh = true;
-        }
-        //W放置Catch
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Vector2 TargetPos = PosInGrid.TargetPos();
-            note note = new note();
-            note.type = 1;
-            note.lineId = (int)TargetPos.x;
-            note.time = (int)TargetPos.y;
-            note.duration = 0;
-            note.id = NoteCreator.NoteId++;
-            note.speed = NotePreset.GetPresetNote().speed;
-            note.livingTime = NotePreset.GetPresetNote().livingTime;
-            note.LineSide = NotePreset.GetPresetNote().LineSide;
-            note.fake = NotePreset.GetPresetNote().fake;
-            note._color = NotePreset.GetPresetNote()._color;
-            foreach (judgeline judgeline in NoteCreator.judgelineList)
-            {
-                if (judgeline.id == note.lineId)
-                {
-                    judgeline.noteList.Add(note);
-                }
-            }
-            Selected = NoteCreator.NoteId - 1;
-            MultiSelected.Clear();
-            Fresh = true;
-        }
-        //E放置Hold
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Holding = !Holding;
-            if (Holding)//开始放置
+            //Q放置Tap
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Vector2 TargetPos = PosInGrid.TargetPos();
                 note note = new note();
-                note.type = 2;
+                note.type = 0;
+                note.lineId = (int)TargetPos.x;
+                note.time = (int)TargetPos.y;
+                note.id = NoteCreator.NoteId++;
+                note.speed = NotePreset.GetPresetNote().speed;
+                note.livingTime = NotePreset.GetPresetNote().livingTime;
+                note.LineSide = NotePreset.GetPresetNote().LineSide;
+                note.fake = NotePreset.GetPresetNote().fake;
+                note._color = NotePreset.GetPresetNote()._color;
+                foreach (judgeline judgeline in NoteCreator.judgelineList)
+                {
+                    if (judgeline.id == note.lineId)
+                    {
+                        judgeline.noteList.Add(note);
+                    }
+                }
+                Selected = NoteCreator.NoteId - 1;
+                MultiSelected.Clear();
+                Fresh = true;
+            }
+            //W放置Catch
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Vector2 TargetPos = PosInGrid.TargetPos();
+                note note = new note();
+                note.type = 1;
                 note.lineId = (int)TargetPos.x;
                 note.time = (int)TargetPos.y;
                 note.duration = 0;
@@ -160,21 +133,51 @@ public class NoteEdit : MonoBehaviour
                 }
                 Selected = NoteCreator.NoteId - 1;
                 MultiSelected.Clear();
+                Fresh = true;
             }
-            else//结束放置
+            //E放置Hold
+            if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                foreach (judgeline judgeline in NoteCreator.judgelineList)
+                Holding = !Holding;
+                if (Holding)//开始放置
                 {
-                    foreach (note note in judgeline.noteList)
+                    Vector2 TargetPos = PosInGrid.TargetPos();
+                    note note = new note();
+                    note.type = 2;
+                    note.lineId = (int)TargetPos.x;
+                    note.time = (int)TargetPos.y;
+                    note.duration = 0;
+                    note.id = NoteCreator.NoteId++;
+                    note.speed = NotePreset.GetPresetNote().speed;
+                    note.livingTime = NotePreset.GetPresetNote().livingTime;
+                    note.LineSide = NotePreset.GetPresetNote().LineSide;
+                    note.fake = NotePreset.GetPresetNote().fake;
+                    note._color = NotePreset.GetPresetNote()._color;
+                    foreach (judgeline judgeline in NoteCreator.judgelineList)
                     {
-                        if (note.id == Selected)
+                        if (judgeline.id == note.lineId)
                         {
-                            Vector2 TargetPos = PosInGrid.TargetPos();
-                            note.duration = (int)TargetPos.y - note.time;
+                            judgeline.noteList.Add(note);
                         }
                     }
+                    Selected = NoteCreator.NoteId - 1;
+                    MultiSelected.Clear();
                 }
-                Fresh = true;
+                else//结束放置
+                {
+                    foreach (judgeline judgeline in NoteCreator.judgelineList)
+                    {
+                        foreach (note note in judgeline.noteList)
+                        {
+                            if (note.id == Selected)
+                            {
+                                Vector2 TargetPos = PosInGrid.TargetPos();
+                                note.duration = (int)TargetPos.y - note.time;
+                            }
+                        }
+                    }
+                    Fresh = true;
+                }
             }
         }
         //多选
