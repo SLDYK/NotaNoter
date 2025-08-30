@@ -12,6 +12,7 @@ public class PresetNote
     public int LineSide = 0;
     public bool fake = false;
     public string _color = "000000FF";
+    public int HitAlpha = 255;
 
     public PresetNote DeepCopy()
     {
@@ -21,6 +22,7 @@ public class PresetNote
         clone.LineSide = this.LineSide;
         clone.fake = this.fake;
         clone._color = this._color != null ? String.Copy(this._color) : null;
+        clone.HitAlpha = this.HitAlpha;
         return clone;
     }
 }
@@ -34,8 +36,10 @@ public class NotePreset : MonoBehaviour
     public Toggle UpSide;
     public Toggle isFake;
     public string _color;
+    public TMP_InputField HitAlpha; // 需要添加这个UI元素引用
 
     public ColorPicker ColorPicker;
+    
     public void LoadPreset()
     {
         LivingTime.text = $"{Preset.livingTime}";
@@ -43,7 +47,9 @@ public class NotePreset : MonoBehaviour
         UpSide.isOn = (Preset.LineSide == 0) ? true : false;
         isFake.isOn = Preset.fake;
         ColorPicker.CurrentColor = HexToColor(Preset._color);
+        HitAlpha.text = $"{Preset.HitAlpha}"; // 添加这行
     }
+    
     public void SavePreset()
     {
         Preset.livingTime = int.Parse(LivingTime.text);
@@ -51,8 +57,9 @@ public class NotePreset : MonoBehaviour
         Preset.LineSide = UpSide.isOn ? 0 : 1;
         Preset.fake = isFake.isOn;
         Preset._color = ColorToHex(ColorPicker.CurrentColor);
-
+        Preset.HitAlpha = int.Parse(HitAlpha.text); // 添加这行
     }
+    
     Color HexToColor(string hex)
     {
         byte r = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);

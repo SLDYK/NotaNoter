@@ -13,8 +13,9 @@ public class SelectEdit : MonoBehaviour
     public TMP_InputField Time;
     public TMP_InputField Duration;
     public TMP_InputField Lineid;
+    public TMP_InputField HitAlpha;
     public ColorPicker ColorPicker;
-    public void LoadNote(note note)
+    public void LoadNote(Note note)
     {
         LivingTime.text = $"{note.livingTime}";
         Speed.text = $"{note.speed}";
@@ -24,6 +25,7 @@ public class SelectEdit : MonoBehaviour
         Time.text = $"{note.time}";
         Duration.text = $"{note.duration}";
         Lineid.text = $"{note.lineId}";
+        HitAlpha.text = $"{note.hitEffectAlpha}";
     }
     public Color HexToColor(string hex)
     {

@@ -22,6 +22,7 @@ public class NoteInfo : MonoBehaviour
     public bool fake;
     public string _color;
     public int id;
+    public int hitEffectAlpha; // Ìí¼ÓÕâ¸ö×Ö¶Î
 
     public Vector3 StartPos;
     public Vector3 EndPos;

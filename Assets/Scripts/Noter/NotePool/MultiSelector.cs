@@ -23,11 +23,11 @@ public class MultiSelector : MonoBehaviour
         List<float> TimeRange = new() { Math.Min(Pos_1.y, Pos_2.y), Math.Max(Pos_1.y, Pos_2.y) };
         List<int> Columns = FilterList(TimeGrid.ColumnList, GetColumns(Pos_1.x, Pos_2.x));
         List<int> Note = new();
-        foreach (judgeline judgeline in NoteCreator.judgelineList)
+        foreach (JudgeLine judgeline in NoteCreator.judgelineList)
         {
             if (Columns.Contains(judgeline.id))
             {
-                foreach (note note in judgeline.noteList)
+                foreach (Note note in judgeline.noteList)
                 {
                     if(note.time >= TimeRange[0] && note.time <= TimeRange[1])
                     {

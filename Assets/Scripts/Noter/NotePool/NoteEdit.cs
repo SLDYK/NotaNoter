@@ -51,9 +51,9 @@ public class NoteEdit : MonoBehaviour
         {
             if (Selected != -1)
             {
-                foreach (judgeline judgeline in NoteCreator.judgelineList)
+                foreach (JudgeLine judgeline in NoteCreator.judgelineList)
                 {
-                    foreach (note note in judgeline.noteList)
+                    foreach (Note note in judgeline.noteList)
                     {
                         if (note.id == Selected)
                         {
@@ -69,7 +69,7 @@ public class NoteEdit : MonoBehaviour
         //D删除
         if (Input.GetKeyDown(KeyCode.D))
         {
-            foreach (judgeline judgeline in NoteCreator.judgelineList)
+            foreach (JudgeLine judgeline in NoteCreator.judgelineList)
             {
                 judgeline.noteList.RemoveAll(note => note.id == Selected);
                 judgeline.noteList.RemoveAll(note => MultiSelected.Contains(note.id));
@@ -88,7 +88,7 @@ public class NoteEdit : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Vector2 TargetPos = PosInGrid.TargetPos();
-                note note = new note();
+                Note note = new Note();
                 note.type = 0;
                 note.lineId = (int)TargetPos.x;
                 note.time = (int)TargetPos.y;
@@ -98,7 +98,7 @@ public class NoteEdit : MonoBehaviour
                 note.LineSide = NotePreset.GetPresetNote().LineSide;
                 note.fake = NotePreset.GetPresetNote().fake;
                 note._color = NotePreset.GetPresetNote()._color;
-                foreach (judgeline judgeline in NoteCreator.judgelineList)
+                foreach (JudgeLine judgeline in NoteCreator.judgelineList)
                 {
                     if (judgeline.id == note.lineId)
                     {
@@ -113,7 +113,7 @@ public class NoteEdit : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 Vector2 TargetPos = PosInGrid.TargetPos();
-                note note = new note();
+                Note note = new Note();
                 note.type = 1;
                 note.lineId = (int)TargetPos.x;
                 note.time = (int)TargetPos.y;
@@ -124,7 +124,7 @@ public class NoteEdit : MonoBehaviour
                 note.LineSide = NotePreset.GetPresetNote().LineSide;
                 note.fake = NotePreset.GetPresetNote().fake;
                 note._color = NotePreset.GetPresetNote()._color;
-                foreach (judgeline judgeline in NoteCreator.judgelineList)
+                foreach (JudgeLine judgeline in NoteCreator.judgelineList)
                 {
                     if (judgeline.id == note.lineId)
                     {
@@ -142,7 +142,7 @@ public class NoteEdit : MonoBehaviour
                 if (Holding)//开始放置
                 {
                     Vector2 TargetPos = PosInGrid.TargetPos();
-                    note note = new note();
+                    Note note = new Note();
                     note.type = 2;
                     note.lineId = (int)TargetPos.x;
                     note.time = (int)TargetPos.y;
@@ -153,7 +153,7 @@ public class NoteEdit : MonoBehaviour
                     note.LineSide = NotePreset.GetPresetNote().LineSide;
                     note.fake = NotePreset.GetPresetNote().fake;
                     note._color = NotePreset.GetPresetNote()._color;
-                    foreach (judgeline judgeline in NoteCreator.judgelineList)
+                    foreach (JudgeLine judgeline in NoteCreator.judgelineList)
                     {
                         if (judgeline.id == note.lineId)
                         {
@@ -165,9 +165,9 @@ public class NoteEdit : MonoBehaviour
                 }
                 else//结束放置
                 {
-                    foreach (judgeline judgeline in NoteCreator.judgelineList)
+                    foreach (JudgeLine judgeline in NoteCreator.judgelineList)
                     {
-                        foreach (note note in judgeline.noteList)
+                        foreach (Note note in judgeline.noteList)
                         {
                             if (note.id == Selected)
                             {
@@ -219,9 +219,9 @@ public class NoteEdit : MonoBehaviour
     {
         Selected = id;
         MultiSelected.Clear();
-        foreach (judgeline judgeline in NoteCreator.judgelineList)
+        foreach (JudgeLine judgeline in NoteCreator.judgelineList)
         {
-            foreach (note note in judgeline.noteList)
+            foreach (Note note in judgeline.noteList)
             {
                 if (note.id == Selected)
                 {
@@ -235,9 +235,9 @@ public class NoteEdit : MonoBehaviour
     public SelectEdit SelectEdit;
     public void CanvasUpdate()
     {
-        foreach (judgeline judgeline in NoteCreator.judgelineList)
+        foreach (JudgeLine judgeline in NoteCreator.judgelineList)
         {
-            foreach (note note in judgeline.noteList)
+            foreach (Note note in judgeline.noteList)
             {
                 if (note.id == Selected && SelectActive)
                 {
@@ -249,6 +249,7 @@ public class NoteEdit : MonoBehaviour
                     note.time = int.Parse(SelectEdit.Time.text);
                     note.duration = int.Parse(SelectEdit.Duration.text);
                     note.lineId = int.Parse(SelectEdit.Lineid.text);
+                    note.hitEffectAlpha = int.Parse(SelectEdit.HitAlpha.text);
                 }
             }
         }
@@ -256,9 +257,9 @@ public class NoteEdit : MonoBehaviour
     public MultiEdit MultiEdit;
     public void MultiUpdate()
     {
-        foreach (judgeline judgeline in NoteCreator.judgelineList)
+        foreach (JudgeLine judgeline in NoteCreator.judgelineList)
         {
-            foreach (note note in judgeline.noteList)
+            foreach (Note note in judgeline.noteList)
             {
                 if (MultiSelected.Contains(note.id)) 
                 {
@@ -267,6 +268,7 @@ public class NoteEdit : MonoBehaviour
                     note.LineSide = MultiEdit.UpSide.isOn ? 0 : 1;
                     note.fake = MultiEdit.isFake.isOn;
                     note._color = MultiEdit.ColorToHex(MultiEdit.ColorPicker.CurrentColor);
+                    note.hitEffectAlpha = int.Parse(MultiEdit.HitAlpha.text); // 添加这行
                 }
             }
         }

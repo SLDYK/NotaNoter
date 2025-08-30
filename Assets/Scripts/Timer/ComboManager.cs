@@ -22,9 +22,9 @@ public class ComboManager : MonoBehaviour
     {
         TapHitTime.Clear();
         CatchHitTime.Clear();
-        foreach (judgeline judgeline in NoteCreator.judgelineList)
+        foreach (JudgeLine judgeline in NoteCreator.judgelineList)
         {
-            foreach (note note in judgeline.noteList)
+            foreach (Note note in judgeline.noteList)
             {
                 if (note.type != 1 && !note.fake)
                 {

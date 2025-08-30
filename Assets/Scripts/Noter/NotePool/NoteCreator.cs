@@ -4,7 +4,7 @@ using UnityEngine;
 public class NoteCreator : MonoBehaviour
 {
     public ChartLoader ChartLoader;
-    public List<judgeline> judgelineList;
+    public List<JudgeLine> judgelineList;
     public Timer Timer;
     public TimeGrid TimeGrid;
 
@@ -17,13 +17,18 @@ public class NoteCreator : MonoBehaviour
         judgelineList = ChartLoader.GetChart().judgelineList;
         LineId = 0;
         NoteId = 0;
-        foreach (judgeline judgeline in judgelineList) 
+        foreach (JudgeLine judgeline in judgelineList)
         {
             judgeline.id = LineId++;
-            foreach (note note in judgeline.noteList)
+            foreach (Note note in judgeline.noteList)
             {
                 note.id = NoteId++;
             }
+        }
+        // 修复遍历 transform 的子对象并销毁
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
         }
     }
     private List<int> NotePool = new List<int>();
@@ -42,9 +47,9 @@ public class NoteCreator : MonoBehaviour
                 Destroy(NoteInfo.gameObject);
             }
         }
-        foreach (judgeline judgeline in judgelineList)
+        foreach (JudgeLine judgeline in judgelineList)
         {
-            foreach(note note in judgeline.noteList)
+            foreach(Note note in judgeline.noteList)
             {
                 if (InTime(note) && InColumn(note))
                 {
@@ -63,6 +68,7 @@ public class NoteCreator : MonoBehaviour
                                 NoteInfo.LineSide = note.LineSide;
                                 NoteInfo.fake = note.fake;
                                 NoteInfo._color = note._color;
+                                NoteInfo.hitEffectAlpha = note.hitEffectAlpha; // 添加这行
                             }
                         }
                     }
@@ -78,6 +84,7 @@ public class NoteCreator : MonoBehaviour
                         CreateNote.GetComponent<NoteInfo>().LineSide = note.LineSide;
                         CreateNote.GetComponent<NoteInfo>().fake = note.fake;
                         CreateNote.GetComponent<NoteInfo>()._color = note._color;
+                        CreateNote.GetComponent<NoteInfo>().hitEffectAlpha = note.hitEffectAlpha; // 添加这行
                         CreateNote.GetComponent<NoteInfo>().id = note.id;
                         CreateNote.GetComponent<NoteInfo>().SetNote();
                         CreateNote.transform.SetParent(transform);
@@ -94,11 +101,11 @@ public class NoteCreator : MonoBehaviour
     {
         return TimeGrid.ColumnList.Contains(NoteInfo.lineId);
     }
-    private bool InTime(note NoteInfo)
+    private bool InTime(Note NoteInfo)
     {
         return NoteInfo.time + NoteInfo.duration > (Timer.GetElapsedTime() - 1) * 1000 && NoteInfo.time <= (Timer.GetElapsedTime() * 1000 + NoteInfo.livingTime);
     }
-    private bool InColumn(note NoteInfo)
+    private bool InColumn(Note NoteInfo)
     {
         return TimeGrid.ColumnList.Contains(NoteInfo.lineId);
     }

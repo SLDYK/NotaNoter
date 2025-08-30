@@ -32,7 +32,7 @@ public class ChartLoader : MonoBehaviour
     {
         return Chart;
     }
-    public void WriteIn(List<judgeline> judgelineList)
+    public void WriteIn(List<JudgeLine> judgelineList)
     {
         judgelineList = NoteReplace(judgelineList);
         Chart.judgelineList = judgelineList;
@@ -41,9 +41,9 @@ public class ChartLoader : MonoBehaviour
         System.IO.File.WriteAllText(ChartPath, ChartJson);
     }
     //Note÷ÿ∑÷≈‰
-    public List<judgeline> NoteReplace(List<judgeline> judgelineList)
+    public List<JudgeLine> NoteReplace(List<JudgeLine> judgelineList)
     {
-        List<note> Replace = new List<note>();
+        List<Note> Replace = new List<Note>();
 
         foreach (var judgeline in judgelineList)
         {
@@ -51,7 +51,7 @@ public class ChartLoader : MonoBehaviour
             judgeline.noteList.Clear();
         }
 
-        foreach (note note in Replace)
+        foreach (Note note in Replace)
         {
             judgelineList[note.lineId].noteList.Add(note);
         }

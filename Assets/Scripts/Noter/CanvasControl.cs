@@ -3,6 +3,8 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
+using PromptSystem;
 
 public class CanvasControl : MonoBehaviour
 {
@@ -43,14 +45,42 @@ public class CanvasControl : MonoBehaviour
     //重载谱面
     public ChartLoader ChartLoader;
     public NoteCreator NoteCreator;
+    public Prompt Prompt;
     public void ReLoad()
     {
-        ChartLoader.ReLoad();
+        try
+        {
+            Prompt.ShowStatus(0); // 显示重载状态
+            ChartLoader.ReLoad();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"重载失败: {ex.Message}");
+            Prompt.ShowStatus(3); // 显示失败状态
+        }
     }
     //保存谱面
     public void SaveChart()
     {
-        ChartLoader.WriteIn(NoteCreator.judgelineList);
+        SaveChartAsync().Forget();
+    }
+
+    private async UniTaskVoid SaveChartAsync()
+    {
+        try
+        {
+            Prompt.ShowStatus(1); // 显示保存中状态
+            ChartLoader.WriteIn(NoteCreator.judgelineList);
+            
+            // 等待0.5秒后显示已保存状态
+            await UniTask.Delay(500);
+            Prompt.ShowStatus(2); // 显示已保存状态
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"保存失败: {ex.Message}");
+            Prompt.ShowStatus(3); // 显示失败状态
+        }
     }
     //编辑设置
     public GameObject Setting;
@@ -95,7 +125,7 @@ public class CanvasControl : MonoBehaviour
     //Note单选编辑
     public GameObject NoteSelect;
     public SelectEdit SelectEdit;
-    public void LoadNote(note note)
+    public void LoadNote(Note note)
     {
         NoteSelect.SetActive(true);
         MultiSelect.SetActive(false);
