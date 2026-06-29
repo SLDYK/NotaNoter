@@ -9,7 +9,7 @@ public class PresetNote
 {
     public int speed = 10;
     public int livingTime = 2000;
-    public int LineSide = 0;
+    public int lineSide = 0;
     public bool fake = false;
     public string _color = "000000FF";
     public int HitAlpha = 255;
@@ -19,7 +19,7 @@ public class PresetNote
         PresetNote clone = new PresetNote();
         clone.speed = this.speed;
         clone.livingTime = this.livingTime;
-        clone.LineSide = this.LineSide;
+        clone.lineSide = this.lineSide;
         clone.fake = this.fake;
         clone._color = this._color != null ? String.Copy(this._color) : null;
         clone.HitAlpha = this.HitAlpha;
@@ -36,7 +36,7 @@ public class NotePreset : MonoBehaviour
     public Toggle UpSide;
     public Toggle isFake;
     public string _color;
-    public TMP_InputField HitAlpha; // ÐèÒªÌí¼ÓÕâ¸öUIÔªËØÒýÓÃ
+    public TMP_InputField HitAlpha; // ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UIÔªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     public ColorPicker ColorPicker;
     
@@ -44,20 +44,20 @@ public class NotePreset : MonoBehaviour
     {
         LivingTime.text = $"{Preset.livingTime}";
         Speed.text = $"{Preset.speed}";
-        UpSide.isOn = (Preset.LineSide == 0) ? true : false;
+        UpSide.isOn = (Preset.lineSide == 0) ? true : false;
         isFake.isOn = Preset.fake;
         ColorPicker.CurrentColor = HexToColor(Preset._color);
-        HitAlpha.text = $"{Preset.HitAlpha}"; // Ìí¼ÓÕâÐÐ
+        HitAlpha.text = $"{Preset.HitAlpha}"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
     
     public void SavePreset()
     {
         Preset.livingTime = int.Parse(LivingTime.text);
         Preset.speed = int.Parse(Speed.text);
-        Preset.LineSide = UpSide.isOn ? 0 : 1;
+        Preset.lineSide = UpSide.isOn ? 0 : 1;
         Preset.fake = isFake.isOn;
         Preset._color = ColorToHex(ColorPicker.CurrentColor);
-        Preset.HitAlpha = int.Parse(HitAlpha.text); // Ìí¼ÓÕâÐÐ
+        Preset.HitAlpha = int.Parse(HitAlpha.text); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
     
     Color HexToColor(string hex)

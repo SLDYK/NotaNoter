@@ -18,11 +18,11 @@ public class NoteInfo : MonoBehaviour
     public int speed;
     public int livingTime;
     public int lineId;
-    public int LineSide;
+    public int lineSide;
     public bool fake;
     public string _color;
     public int id;
-    public int hitEffectAlpha; // Ìí¼ÓÕâ¸ö×Ö¶Î
+    public int hitEffectAlpha; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½
 
     public Vector3 StartPos;
     public Vector3 EndPos;

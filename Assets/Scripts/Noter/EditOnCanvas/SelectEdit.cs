@@ -19,7 +19,7 @@ public class SelectEdit : MonoBehaviour
     {
         LivingTime.text = $"{note.livingTime}";
         Speed.text = $"{note.speed}";
-        UpSide.isOn = (note.LineSide == 0) ? true : false;
+        UpSide.isOn = (note.lineSide == 0) ? true : false;
         isFake.isOn = note.fake;
         ColorPicker.CurrentColor = HexToColor(note._color);
         Time.text = $"{note.time}";

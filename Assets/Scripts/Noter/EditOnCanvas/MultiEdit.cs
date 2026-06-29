@@ -10,7 +10,7 @@ public class MultiEdit : MonoBehaviour
     public Toggle UpSide;
     public Toggle isFake;
     public string _color;
-    public TMP_InputField HitAlpha; // Ìí¼ÓHitAlphaÊäÈë×Ö¶Î
+    public TMP_InputField HitAlpha; // ï¿½ï¿½ï¿½ï¿½HitAlphaï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½
     public ColorPicker ColorPicker;
 
     public NotePreset NotePreset;
@@ -18,10 +18,10 @@ public class MultiEdit : MonoBehaviour
     {
         LivingTime.text = $"{NotePreset.Preset.livingTime}";
         Speed.text = $"{NotePreset.Preset.speed}";
-        UpSide.isOn = (NotePreset.Preset.LineSide == 0) ? true : false;
+        UpSide.isOn = (NotePreset.Preset.lineSide == 0) ? true : false;
         isFake.isOn = NotePreset.Preset.fake;
         ColorPicker.CurrentColor = HexToColor(NotePreset.Preset._color);
-        HitAlpha.text = $"{NotePreset.Preset.HitAlpha}"; // Ìí¼ÓHitAlpha¼ÓÔØÂß¼­
+        HitAlpha.text = $"{NotePreset.Preset.HitAlpha}"; // ï¿½ï¿½ï¿½ï¿½HitAlphaï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
     }
     public Color HexToColor(string hex)
     {

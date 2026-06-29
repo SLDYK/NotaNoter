@@ -25,7 +25,7 @@ public class NoteCreator : MonoBehaviour
                 note.id = NoteId++;
             }
         }
-        // ÐÞ¸´±éÀú transform µÄ×Ó¶ÔÏó²¢Ïú»Ù
+        // ï¿½Þ¸ï¿½ï¿½ï¿½ï¿½ï¿½ transform ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
@@ -65,10 +65,10 @@ public class NoteCreator : MonoBehaviour
                                 NoteInfo.speed = note.speed;
                                 NoteInfo.livingTime = note.livingTime;
                                 NoteInfo.lineId = note.lineId;
-                                NoteInfo.LineSide = note.LineSide;
+                                NoteInfo.lineSide = note.lineSide;
                                 NoteInfo.fake = note.fake;
                                 NoteInfo._color = note._color;
-                                NoteInfo.hitEffectAlpha = note.hitEffectAlpha; // Ìí¼ÓÕâÐÐ
+                                NoteInfo.hitEffectAlpha = note.hitEffectAlpha; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                             }
                         }
                     }
@@ -81,10 +81,10 @@ public class NoteCreator : MonoBehaviour
                         CreateNote.GetComponent<NoteInfo>().speed = note.speed;
                         CreateNote.GetComponent<NoteInfo>().livingTime = note.livingTime;
                         CreateNote.GetComponent<NoteInfo>().lineId = note.lineId;
-                        CreateNote.GetComponent<NoteInfo>().LineSide = note.LineSide;
+                        CreateNote.GetComponent<NoteInfo>().lineSide = note.lineSide;
                         CreateNote.GetComponent<NoteInfo>().fake = note.fake;
                         CreateNote.GetComponent<NoteInfo>()._color = note._color;
-                        CreateNote.GetComponent<NoteInfo>().hitEffectAlpha = note.hitEffectAlpha; // Ìí¼ÓÕâÐÐ
+                        CreateNote.GetComponent<NoteInfo>().hitEffectAlpha = note.hitEffectAlpha; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                         CreateNote.GetComponent<NoteInfo>().id = note.id;
                         CreateNote.GetComponent<NoteInfo>().SetNote();
                         CreateNote.transform.SetParent(transform);

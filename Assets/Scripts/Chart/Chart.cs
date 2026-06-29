@@ -2,35 +2,35 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// ÒôÀÖÓÎÏ·Í¼±íÊý¾Ý½á¹¹
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹
 /// </summary>
 [System.Serializable]
 public class Chart
 {
-    [Header("»ù±¾ÐÅÏ¢")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢")]
     public int formatVersion;
     public string name;
     public string composer;
     public string charter;
     public string illustrator;
 
-    [Header("ÓÎÏ·ÉèÖÃ")]
+    [Header("ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½")]
     public float difficulty;
     public float bpm;
     public int offset;
     public int noteNum;
 
-    [Header("Êý¾ÝÁÐ±í")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½")]
     public List<BPMSection> bpmList;
     public List<JudgeLine> judgelineList;
     public List<PerformImage> performImgList;
 
-    [Header("ÏÔÊ¾ÉèÖÃ")]
+    [Header("ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½")]
     public string _startTipcolor;
 }
 
 /// <summary>
-/// BPM±ä»¯¶ÎÂä
+/// BPMï¿½ä»¯ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 [System.Serializable]
 public class BPMSection
@@ -40,39 +40,39 @@ public class BPMSection
 }
 
 /// <summary>
-/// ÅÐ¶¨Ïß
+/// ï¿½Ð¶ï¿½ï¿½ï¿½
 /// </summary>
 [System.Serializable]
 public class JudgeLine
 {
-    [Header("»ù±¾ÊôÐÔ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public int id;
     public float angle;
     public float scale;
     public string _color;
     public string _pos;
 
-    [Header("Êý¾Ý")]
+    [Header("ï¿½ï¿½ï¿½ï¿½")]
     public List<Note> noteList;
     public EventList eventList;
 }
 
 /// <summary>
-/// ±íÑÝÍ¼Æ¬
+/// ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 /// </summary>
 [System.Serializable]
 public class PerformImage
 {
-    [Header("×ÊÔ´ÐÅÏ¢")]
+    [Header("ï¿½ï¿½Ô´ï¿½ï¿½Ï¢")]
     public string path;
     public string hash;
     public string name;
 
-    [Header("Ê±¼äÉèÖÃ")]
+    [Header("Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public int startTime;
     public int endTime;
 
-    [Header("±ä»»ÊôÐÔ")]
+    [Header("ï¿½ä»»ï¿½ï¿½ï¿½ï¿½")]
     public float angle;
     public float scale;
     public float scaleX;
@@ -80,16 +80,16 @@ public class PerformImage
     public string _color;
     public string _pos;
 
-    [Header("äÖÈ¾ÉèÖÃ")]
+    [Header("ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½")]
     public int layer;
     public int sortingOrder;
 
-    [Header("ÊÂ¼þ")]
+    [Header("ï¿½Â¼ï¿½")]
     public EventList eventList;
 }
 
 /// <summary>
-/// »ù´¡ÊÂ¼þÀà
+/// ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
 /// </summary>
 [System.Serializable]
 public class Event
@@ -100,7 +100,7 @@ public class Event
 }
 
 /// <summary>
-/// ÊÂ¼þÁÐ±íÈÝÆ÷
+/// ï¿½Â¼ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 [System.Serializable]
 public class EventList
@@ -113,7 +113,7 @@ public class EventList
 }
 
 /// <summary>
-/// ÒÆ¶¯ÊÂ¼þ
+/// ï¿½Æ¶ï¿½ï¿½Â¼ï¿½
 /// </summary>
 [System.Serializable]
 public class MoveEvent : Event
@@ -123,7 +123,7 @@ public class MoveEvent : Event
 }
 
 /// <summary>
-/// Ðý×ªÊÂ¼þ
+/// ï¿½ï¿½×ªï¿½Â¼ï¿½
 /// </summary>
 [System.Serializable]
 public class RotateEvent : Event
@@ -133,7 +133,7 @@ public class RotateEvent : Event
 }
 
 /// <summary>
-/// ÑÕÉ«ÊÂ¼þ
+/// ï¿½ï¿½É«ï¿½Â¼ï¿½
 /// </summary>
 [System.Serializable]
 public class ColorEvent : Event
@@ -143,7 +143,7 @@ public class ColorEvent : Event
 }
 
 /// <summary>
-/// Ëõ·ÅÊÂ¼þ
+/// ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 /// </summary>
 [System.Serializable]
 public class ScaleEvent : Event
@@ -153,32 +153,32 @@ public class ScaleEvent : Event
 }
 
 /// <summary>
-/// Òô·û
+/// ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 [System.Serializable]
 public class Note
 {
-    [Header("»ù±¾ÊôÐÔ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public int id;
     public int type;
     public int time;
     public int duration;
 
-    [Header("ÓÎÏ·ÊôÐÔ")]
+    [Header("ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½")]
     public int speed;
     public int livingTime;
     public int lineId;
-    public int LineSide;
+    public int lineSide;
     public bool fake;
 
-    [Header("ÊÓ¾õÐ§¹û")]
+    [Header("ï¿½Ó¾ï¿½Ð§ï¿½ï¿½")]
     public string _color;
     public int hitEffectAlpha;
 
     /// <summary>
-    /// Éî¿½±´Òô·û¶ÔÏó
+    /// ï¿½î¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <returns>ÐÂµÄÒô·û¶ÔÏó</returns>
+    /// <returns>ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</returns>
     public Note DeepCopy()
     {
         return new Note
@@ -189,7 +189,7 @@ public class Note
             speed = this.speed,
             livingTime = this.livingTime,
             lineId = this.lineId,
-            LineSide = this.LineSide,
+            lineSide = this.lineSide,
             fake = this.fake,
             _color = this._color,
             id = this.id,
