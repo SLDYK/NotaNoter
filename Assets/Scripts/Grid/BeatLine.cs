@@ -14,7 +14,7 @@ public class BeatLine : MonoBehaviour
     }
     public void Line(Vector3 PointA, Vector3 PointB, bool IntBeat, int BeatNum, int Column)
     {
-        if (IntBeat)//ÕûÊıÅÄºáÏß
+        if (IntBeat)// æ•´æ‹çš„æ¨ªçº¿
         {
             lineRenderer.startWidth = 0.03f;
             lineRenderer.endWidth = 0.03f;
@@ -22,7 +22,7 @@ public class BeatLine : MonoBehaviour
             lineRenderer.endColor = new Color(0, 0.5f, 1f);
             TextMesh.text = $" {BeatNum}";
         }
-        else if (BeatNum == -1)//ÊúÏß
+        else if (BeatNum == -1)// ç«–çº¿
         {
             lineRenderer.startWidth = 0.02f;
             lineRenderer.endWidth = 0.02f;
@@ -38,7 +38,7 @@ public class BeatLine : MonoBehaviour
                 TextMesh.text = $"{Column}";
             }
         }
-        else//·ÖÅÄºáÏß
+        else// éæ•´æ‹çš„æ¨ªçº¿
         {
             lineRenderer.startWidth = 0.02f;
             lineRenderer.endWidth = 0.02f;

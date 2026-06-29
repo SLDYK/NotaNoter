@@ -21,18 +21,18 @@ public class BPMdata
 }
 public class TimeGrid : MonoBehaviour
 {
-    //用到的组件
+    // 鑾峰彇鐩稿叧缁勪欢
     public Timer Timer;
     public LineRenderer lineRenderer;
     public ChartLoader ChartLoader;
-    //网格设置
+    // 璋遍潰鍙傛暟
     public int BeatSplit;
     public float ScrollSpeed;
-    //坐标计算
+    // 缃戞牸鍙傛暟
     public Vector3 NoterPos;
     private float worldScreenHeight;
     private float worldScreenWidth;
-    //列表
+    // 鍒楄〃
     public List<BeatInfo> BeatLine;
     public List<BeatInfo> BeatLinesSplit;
     public List<float> VerticalLine;
@@ -40,7 +40,7 @@ public class TimeGrid : MonoBehaviour
     public List<int> ColumnList;
     private Chart Chart;
 
-    //本质是开始函数，但由ChartLoader调用
+    // 鍦ㄦ澶勫紑濮嬭繍琛岋紝绛夊緟ChartLoader鍔犺浇
     public void SetGrid()
     {
         Chart = ChartLoader.GetChart();

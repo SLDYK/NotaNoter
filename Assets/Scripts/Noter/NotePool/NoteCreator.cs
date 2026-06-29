@@ -25,7 +25,7 @@ public class NoteCreator : MonoBehaviour
                 note.id = NoteId++;
             }
         }
-        // �޸����� transform ���Ӷ�������
+        // 删除所有子对象以重新加载
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
@@ -68,7 +68,7 @@ public class NoteCreator : MonoBehaviour
                                 NoteInfo.lineSide = note.lineSide;
                                 NoteInfo.fake = note.fake;
                                 NoteInfo._color = note._color;
-                                NoteInfo.hitEffectAlpha = note.hitEffectAlpha; // ��������
+                                NoteInfo.hitEffectAlpha = note.hitEffectAlpha; // 同步
                             }
                         }
                     }
@@ -84,7 +84,7 @@ public class NoteCreator : MonoBehaviour
                         CreateNote.GetComponent<NoteInfo>().lineSide = note.lineSide;
                         CreateNote.GetComponent<NoteInfo>().fake = note.fake;
                         CreateNote.GetComponent<NoteInfo>()._color = note._color;
-                        CreateNote.GetComponent<NoteInfo>().hitEffectAlpha = note.hitEffectAlpha; // ��������
+                        CreateNote.GetComponent<NoteInfo>().hitEffectAlpha = note.hitEffectAlpha; // 同步
                         CreateNote.GetComponent<NoteInfo>().id = note.id;
                         CreateNote.GetComponent<NoteInfo>().SetNote();
                         CreateNote.transform.SetParent(transform);

@@ -22,7 +22,7 @@ public class NoteInfo : MonoBehaviour
     public bool fake;
     public string _color;
     public int id;
-    public int hitEffectAlpha; // ��������ֶ�
+    public int hitEffectAlpha; // 定义字段
 
     public Vector3 StartPos;
     public Vector3 EndPos;

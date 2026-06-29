@@ -36,7 +36,7 @@ public class NotePreset : MonoBehaviour
     public Toggle UpSide;
     public Toggle isFake;
     public string _color;
-    public TMP_InputField HitAlpha; // ��Ҫ�������UIԪ������
+    public TMP_InputField HitAlpha; // 需要关联的UI元素字段
 
     public ColorPicker ColorPicker;
     
@@ -47,7 +47,7 @@ public class NotePreset : MonoBehaviour
         UpSide.isOn = (Preset.lineSide == 0) ? true : false;
         isFake.isOn = Preset.fake;
         ColorPicker.CurrentColor = HexToColor(Preset._color);
-        HitAlpha.text = $"{Preset.HitAlpha}"; // ��������
+        HitAlpha.text = $"{Preset.HitAlpha}"; // 加载
     }
     
     public void SavePreset()
@@ -57,7 +57,7 @@ public class NotePreset : MonoBehaviour
         Preset.lineSide = UpSide.isOn ? 0 : 1;
         Preset.fake = isFake.isOn;
         Preset._color = ColorToHex(ColorPicker.CurrentColor);
-        Preset.HitAlpha = int.Parse(HitAlpha.text); // ��������
+        Preset.HitAlpha = int.Parse(HitAlpha.text); // 保存
     }
     
     Color HexToColor(string hex)

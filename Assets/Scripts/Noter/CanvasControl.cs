@@ -14,7 +14,7 @@ public class CanvasControl : MonoBehaviour
         SetMeshSpeed();
         SetBeatSplit();
     }
-    //ÅĞ¶¨Ïß×é
+    // åˆ¤å®šåˆ—æ•°
     public TMP_InputField ColumnList;
     public TimeGrid TimeGrid;
     private static List<int> ToIntList(string input)
@@ -30,19 +30,19 @@ public class CanvasControl : MonoBehaviour
     {
         TimeGrid.ColumnList = ToIntList(ColumnList.text);
     }
-    //Íø¸ñËÙ¶È
+    // è°±é¢é€Ÿåº¦
     public Slider MeshSpeed;
     public void SetMeshSpeed()
     {
         TimeGrid.ScrollSpeed = MeshSpeed.value;
     }
-    //·ÖÅÄ
+    // æ‹å­
     public TMP_InputField BeatSplit;
     public void SetBeatSplit()
     {
         TimeGrid.BeatSplit = int.Parse(BeatSplit.text);
     }
-    //ÖØÔØÆ×Ãæ
+    // é‡æ–°åŠ è½½
     public ChartLoader ChartLoader;
     public NoteCreator NoteCreator;
     public Prompt Prompt;
@@ -50,16 +50,16 @@ public class CanvasControl : MonoBehaviour
     {
         try
         {
-            Prompt.ShowStatus(0); // ÏÔÊ¾ÖØÔØ×´Ì¬
+            Prompt.ShowStatus(0); // æ˜¾ç¤ºåŠ è½½çŠ¶æ€
             ChartLoader.ReLoad();
         }
         catch (Exception ex)
         {
-            Debug.LogError($"ÖØÔØÊ§°Ü: {ex.Message}");
-            Prompt.ShowStatus(3); // ÏÔÊ¾Ê§°Ü×´Ì¬
+            Debug.LogError($"åŠ è½½å¤±è´¥: {ex.Message}");
+            Prompt.ShowStatus(3); // æ˜¾ç¤ºå¤±è´¥çŠ¶æ€
         }
     }
-    //±£´æÆ×Ãæ
+    // ä¿å­˜è°±é¢
     public void SaveChart()
     {
         SaveChartAsync().Forget();
@@ -69,20 +69,20 @@ public class CanvasControl : MonoBehaviour
     {
         try
         {
-            Prompt.ShowStatus(1); // ÏÔÊ¾±£´æÖĞ×´Ì¬
+            Prompt.ShowStatus(1); // æ˜¾ç¤ºä¿å­˜ä¸­çŠ¶æ€
             ChartLoader.WriteIn(NoteCreator.judgelineList);
             
-            // µÈ´ı0.5ÃëºóÏÔÊ¾ÒÑ±£´æ×´Ì¬
+            // ç­‰å¾…0.5ç§’ä»¥æ˜¾ç¤ºå·²ä¿å­˜çŠ¶æ€
             await UniTask.Delay(500);
-            Prompt.ShowStatus(2); // ÏÔÊ¾ÒÑ±£´æ×´Ì¬
+            Prompt.ShowStatus(2); // æ˜¾ç¤ºå·²ä¿å­˜çŠ¶æ€
         }
         catch (Exception ex)
         {
-            Debug.LogError($"±£´æÊ§°Ü: {ex.Message}");
-            Prompt.ShowStatus(3); // ÏÔÊ¾Ê§°Ü×´Ì¬
+            Debug.LogError($"ä¿å­˜å¤±è´¥: {ex.Message}");
+            Prompt.ShowStatus(3); // æ˜¾ç¤ºå¤±è´¥çŠ¶æ€
         }
     }
-    //±à¼­ÉèÖÃ
+    // ç¼–è¾‘è®¾ç½®
     public GameObject Setting;
     public void NoteSetting()
     {
@@ -92,7 +92,7 @@ public class CanvasControl : MonoBehaviour
         NoteSelect.SetActive(false);
         MultiSelect.SetActive(false);
     }
-    //TrackÉèÖÃ
+    // Trackè®¾ç½®
     public GameObject BPMSetting;
     public BPMShow BPMShow;
     public void TrackSetting()
@@ -107,7 +107,7 @@ public class CanvasControl : MonoBehaviour
             BPMShow.LoadBPM();
         }
     }
-    //NoteÄ£°å
+    // Noteæ¨¡æ¿
     public GameObject Preset;
     public NotePreset NotePreset;
     public void PresetSetting()
@@ -122,7 +122,7 @@ public class CanvasControl : MonoBehaviour
             NotePreset.LoadPreset();
         }
     }
-    //Noteµ¥Ñ¡±à¼­
+    // Noteå•é€‰ç¼–è¾‘
     public GameObject NoteSelect;
     public SelectEdit SelectEdit;
     public void LoadNote(Note note)
@@ -137,7 +137,7 @@ public class CanvasControl : MonoBehaviour
             SelectEdit.LoadNote(note);
         }
     }
-    //Note¶àÑ¡±à¼­
+    // Noteå¤šé€‰ç¼–è¾‘
     public GameObject MultiSelect;
     public void LoadMulti()
     {
@@ -147,7 +147,7 @@ public class CanvasControl : MonoBehaviour
         Setting.SetActive(false);
         Preset.SetActive(false);
     }
-    //ÓÒ¼üÈ¡ÏûÑ¡Ôñ
+    // å³é”®å–æ¶ˆé€‰ä¸­
     public void Unselect()
     {
         NoteSelect.SetActive(false);

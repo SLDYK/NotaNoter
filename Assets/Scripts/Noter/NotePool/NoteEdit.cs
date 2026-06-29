@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 public class NoteEdit : MonoBehaviour
 {
-    public int Selected = -1;//����ѡ��id��-1��ʾ��ѡ��
-    public List<int> MultiSelected = new() { };//����ѡ��id
-    private bool Fresh = false;//ˢ��Combo����Note��������ã�һ֡�������һ��
+    public int Selected = -1;// 当前选中id，-1表示未选中
+    public List<int> MultiSelected = new() { };// 多选选中id
+    private bool Fresh = false;// 刷新Combo和Note渲染，一帧内最多一次
 
     public NoteCreator NoteCreator;
     public ComboManager ComboManager;
@@ -19,20 +19,20 @@ public class NoteEdit : MonoBehaviour
     private bool Holding = false;
     void Update()
     {
-        //ˢ�²���
+        // 刷新操作
         if (Fresh)
         {
             ComboManager.FreshTime();
             Fresh = false;
         }
-        //�Ҽ��������ѡ��
+        // 右键取消所有选中
         if (Input.GetMouseButtonDown(1))
         {
             Selected = -1;
             MultiSelected.Clear();
             CanvasControl.Unselect();
         }
-        //���ѡ��
+        // 渲染选中
         NoteInfo[] NoteInfos = GetComponentsInChildren<NoteInfo>();
         foreach (NoteInfo NoteInfo in NoteInfos)
         {
@@ -46,7 +46,7 @@ public class NoteEdit : MonoBehaviour
                 NoteInfo.Select();
             }
         }
-        //F����
+        // F吸附
         if (Input.GetKey(KeyCode.F))
         {
             if (Selected != -1)
@@ -66,7 +66,7 @@ public class NoteEdit : MonoBehaviour
                 Fresh = true;
             }
         }
-        //Dɾ��
+        // D删除
         if (Input.GetKeyDown(KeyCode.D))
         {
             foreach (JudgeLine judgeline in NoteCreator.judgelineList)
@@ -84,7 +84,7 @@ public class NoteEdit : MonoBehaviour
         }
         if (EventSystem.current.currentSelectedGameObject == null)
         {
-            //Q����Tap
+            // Q放置Tap
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Vector2 TargetPos = PosInGrid.TargetPos();
@@ -110,7 +110,7 @@ public class NoteEdit : MonoBehaviour
                 MultiSelected.Clear();
                 Fresh = true;
             }
-            //W����Catch
+            // W放置Catch
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 Vector2 TargetPos = PosInGrid.TargetPos();
@@ -137,11 +137,11 @@ public class NoteEdit : MonoBehaviour
                 MultiSelected.Clear();
                 Fresh = true;
             }
-            //E����Hold
+            // E放置Hold
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 Holding = !Holding;
-                if (Holding)//��ʼ����
+                if (Holding)// 开始放置
                 {
                     Vector2 TargetPos = PosInGrid.TargetPos();
                     Note note = new Note();
@@ -166,7 +166,7 @@ public class NoteEdit : MonoBehaviour
                     Selected = NoteCreator.NoteId - 1;
                     MultiSelected.Clear();
                 }
-                else//��������
+                else// 结束放置
                 {
                     foreach (JudgeLine judgeline in NoteCreator.judgelineList)
                     {
@@ -183,7 +183,7 @@ public class NoteEdit : MonoBehaviour
                 }
             }
         }
-        //��ѡ
+        // 框选
         if (Input.GetKey(KeyCode.LeftControl))
         {
             if (Input.GetMouseButtonDown(0))
@@ -212,7 +212,7 @@ public class NoteEdit : MonoBehaviour
             SelectArea.EndPos();
         }
     }
-    //��ֹѡ���ͻ
+    // 防止选中冲突
     public bool SelectActive = false;
     private void CanvasAvailable()
     {

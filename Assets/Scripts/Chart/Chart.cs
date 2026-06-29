@@ -1,37 +1,33 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-/// <summary>
-/// ������Ϸͼ�����ݽṹ
-/// </summary>
+// 音乐游戏图表数据结构
 [System.Serializable]
 public class Chart
 {
-    [Header("������Ϣ")]
+    [Header("基础信息")]
     public int formatVersion;
     public string name;
     public string composer;
     public string charter;
     public string illustrator;
 
-    [Header("��Ϸ����")]
+    [Header("游戏参数")]
     public float difficulty;
     public float bpm;
     public int offset;
     public int noteNum;
 
-    [Header("�����б�")]
+    [Header("物件列表")]
     public List<BPMSection> bpmList;
     public List<JudgeLine> judgelineList;
     public List<PerformImage> performImgList;
 
-    [Header("��ʾ����")]
+    [Header("显示参数")]
     public string _startTipcolor;
 }
 
-/// <summary>
-/// BPM�仯����
-/// </summary>
+// BPM变化区间
 [System.Serializable]
 public class BPMSection
 {
@@ -39,40 +35,36 @@ public class BPMSection
     public float bpm;
 }
 
-/// <summary>
-/// �ж���
-/// </summary>
+// 判定线
 [System.Serializable]
 public class JudgeLine
 {
-    [Header("��������")]
+    [Header("基本信息")]
     public int id;
     public float angle;
     public float scale;
     public string _color;
     public string _pos;
 
-    [Header("����")]
+    [Header("音符")]
     public List<Note> noteList;
     public EventList eventList;
 }
 
-/// <summary>
-/// ����ͼƬ
-/// </summary>
+// 表演图片
 [System.Serializable]
 public class PerformImage
 {
-    [Header("��Դ��Ϣ")]
+    [Header("资源信息")]
     public string path;
     public string hash;
     public string name;
 
-    [Header("ʱ������")]
+    [Header("时间参数")]
     public int startTime;
     public int endTime;
 
-    [Header("�任����")]
+    [Header("变换参数")]
     public float angle;
     public float scale;
     public float scaleX;
@@ -80,17 +72,15 @@ public class PerformImage
     public string _color;
     public string _pos;
 
-    [Header("��Ⱦ����")]
+    [Header("渲染参数")]
     public int layer;
     public int sortingOrder;
 
-    [Header("�¼�")]
+    [Header("事件")]
     public EventList eventList;
 }
 
-/// <summary>
-/// �����¼���
-/// </summary>
+// 基础事件类
 [System.Serializable]
 public class Event
 {
@@ -99,9 +89,7 @@ public class Event
     public int type;
 }
 
-/// <summary>
-/// �¼��б�����
-/// </summary>
+// 事件列表容器
 [System.Serializable]
 public class EventList
 {
@@ -112,9 +100,7 @@ public class EventList
     public List<ScaleEvent> scaleYEvents;
 }
 
-/// <summary>
-/// �ƶ��¼�
-/// </summary>
+// 移动事件
 [System.Serializable]
 public class MoveEvent : Event
 {
@@ -122,9 +108,7 @@ public class MoveEvent : Event
     public string _pos;
 }
 
-/// <summary>
-/// ��ת�¼�
-/// </summary>
+// 旋转事件
 [System.Serializable]
 public class RotateEvent : Event
 {
@@ -132,9 +116,7 @@ public class RotateEvent : Event
     public float endAngle;
 }
 
-/// <summary>
-/// ��ɫ�¼�
-/// </summary>
+// 颜色事件
 [System.Serializable]
 public class ColorEvent : Event
 {
@@ -142,9 +124,7 @@ public class ColorEvent : Event
     public string _endcolor;
 }
 
-/// <summary>
-/// �����¼�
-/// </summary>
+// 缩放事件
 [System.Serializable]
 public class ScaleEvent : Event
 {
@@ -152,33 +132,29 @@ public class ScaleEvent : Event
     public float endScale;
 }
 
-/// <summary>
-/// ����
-/// </summary>
+// 音符
 [System.Serializable]
 public class Note
 {
-    [Header("��������")]
+    [Header("基础参数")]
     public int id;
     public int type;
     public int time;
     public int duration;
 
-    [Header("��Ϸ����")]
+    [Header("游戏参数")]
     public int speed;
     public int livingTime;
     public int lineId;
     public int lineSide;
     public bool fake;
 
-    [Header("�Ӿ�Ч��")]
+    [Header("视觉效果")]
     public string _color;
     public int hitEffectAlpha;
 
-    /// <summary>
-    /// �����������
-    /// </summary>
-    /// <returns>�µ���������</returns>
+    // 深拷贝音符数据
+    // 返回新的音符数据
     public Note DeepCopy()
     {
         return new Note
